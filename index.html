@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Willian Deivson | Projetos Elétricos</title>
+<meta name="description" content="Projetos elétricos para arquitetos e engenheiros.">
+<meta name="theme-color" content="#111111">
+
+<!-- Fonte: Source Sans 3 (gratuita, Google Fonts, sem cadastro). Se não carregar, usa a fonte do sistema. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --card-bg: rgba(40, 40, 40, 0.38);
+    --card-border: rgba(255, 255, 255, 0.18);
+    --text: #ffffff;
+    --muted: #a8a8a8;
+    --footer: #8e8e8e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+
+  body {
+    font-family: "Source Sans 3", "Source Sans Pro", "Segoe UI", system-ui, Arial, sans-serif;
+    background: #111;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* =====================================================
+     IMAGEM DE FUNDO
+     >>> COLOQUE O LINK DA SUA FOTO DE FUNDO AQUI <<<
+     Troque o valor de --bg-image. Exemplos:
+       url("foto.jpg")                     (arquivo no mesmo repositório)
+       url("https://seusite.com/foto.jpg") (link externo)
+     Dica: foto em preto e branco combina com o design.
+
+     Para a foto repetida lado a lado (como no Carrd), use:
+       --bg-size: auto 100%;  --bg-repeat: repeat-x;
+     Para uma foto única cobrindo a tela, deixe: cover / no-repeat.
+     ===================================================== */
+  .bg {
+    --bg-image: none;          /* <<< COLOQUE AQUI: url("foto.jpg") */
+    --bg-size: cover;
+    --bg-repeat: no-repeat;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: #111;
+    background-image:
+      linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5)),  /* overlay escuro */
+      var(--bg-image);
+    background-size: 100% 100%, var(--bg-size);
+    background-position: center, center top;
+    background-repeat: no-repeat, var(--bg-repeat);
+  }
+
+  /* ---------- Layout: cartão na parte baixa da tela, como na referência ---------- */
+  .page {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 44px;
+    padding: 24px 20px max(48px, env(safe-area-inset-bottom));
+  }
+
+  /* ---------- Cartão glassmorphism ---------- */
+  .card {
+    width: 100%;
+    max-width: 985px;
+    display: grid;
+    grid-template-columns: 1fr;        /* mobile: empilhado */
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 30px;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    transition: transform .25s ease-out;
+    animation: enter .8s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* Coluna do texto */
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 36px 24px 28px;
+  }
+
+  .title {
+    font-size: clamp(1.9rem, 7vw, 2.7rem);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    font-size: clamp(1rem, 3.5vw, 1.15rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Coluna dos botões (com linha divisória) */
+  .socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 28px 24px 36px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .social {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: #000;
+    border-radius: 17px;
+    text-decoration: none;
+    transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s;
+  }
+  .social svg { width: 30px; height: 30px; fill: currentColor; }
+  .social:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.5);
+  }
+  .social:active { transform: scale(.96); }
+  a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+
+  /* ---------- Rodapé ---------- */
+  .footer {
+    text-align: center;
+    font-size: clamp(.9rem, 3.2vw, 1.15rem);
+    font-weight: 300;
+    text-transform: uppercase;
+    color: var(--footer);
+    line-height: 1.5;
+  }
+
+  /* ---------- Desktop: duas colunas iguais + divisória vertical ---------- */
+  @media (min-width: 760px) {
+    .card {
+      grid-template-columns: 1fr 1fr;
+      min-height: 186px;
+    }
+    .info {
+      align-items: flex-start;
+      text-align: left;
+      padding: 0 40px 0 clamp(40px, 11vw, 107px);
+    }
+    .socials {
+      position: relative;
+      gap: 30px;
+      padding: 0 24px;
+      border-top: 0;
+    }
+    /* linha vertical no centro do cartão */
+    .socials::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 1px;
+      height: 84px;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; transition: none; }
+    .social { transition: none; }
+  }
+</style>
+</head>
+
+<body>
+  <div class="bg" id="bg"></div>
+
+  <main class="page">
+    <section class="card" id="card">
+      <div class="info">
+        <h1 class="title">Willian Deivson</h1>
+        <p class="subtitle">Projetos Elétricos</p>
+      </div>
+
+      <nav class="socials" aria-label="Redes e contato">
+        <!-- Instagram -->
+        <a class="social" href="https://www.instagram.com/wd.eletric/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a class="social" href="https://www.linkedin.com/in/willian-deivson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm6.5 0h3.83v1.54h.06c.53-1 1.84-2.04 3.78-2.04 4.05 0 4.8 2.66 4.8 6.12V21h-4v-4.78c0-1.14-.02-2.6-1.59-2.6-1.59 0-1.83 1.24-1.83 2.52V21h-4V9.75Z"/></svg>
+        </a>
+
+        <!-- E-mail: abre o Gmail no computador; no celular o script abaixo troca para mailto: -->
+        <a class="social" id="emailBtn" href="https://mail.google.com/mail/?view=cm&fs=1&to=williandeivson.eng.eletrica@gmail.com&su=Or%C3%A7amento%20de%20projeto%20el%C3%A9trico" target="_blank" rel="noopener noreferrer" aria-label="Enviar e-mail">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v.4l-10 6.3L2 5.9v-.4ZM2 8.25V18.5A1.5 1.5 0 0 0 3.5 20h17a1.5 1.5 0 0 0 1.5-1.5V8.25l-9.47 5.97a1 1 0 0 1-1.06 0L2 8.25Z"/></svg>
+        </a>
+      </nav>
+    </section>
+
+    <footer class="footer">Projetos elétricos para arquitetos e engenheiros</footer>
+  </main>
+
+  <script>
+    // E-mail: no celular abre o app de e-mail (mailto); no computador abre o Gmail no navegador
+    (function () {
+      var btn = document.getElementById("emailBtn");
+      if (window.matchMedia("(pointer: coarse)").matches) {
+        btn.href = "mailto:williandeivson.eng.eletrica@gmail.com?subject=Or%C3%A7amento%20de%20projeto%20el%C3%A9trico";
+        btn.removeAttribute("target");
+      }
+    })();
+  </script>
+</body>
+</html>
