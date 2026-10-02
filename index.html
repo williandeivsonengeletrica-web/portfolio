@@ -45,14 +45,14 @@
      Para uma foto única cobrindo a tela, deixe: cover / no-repeat.
      ===================================================== */
   .bg {
-    --bg-image: none;          /* <<< COLOQUE AQUI: url("foto.jpg") */
+    --bg-image: url('fundo.jpg');          /* <<< COLOQUE AQUI: url("foto.jpg") */
     --bg-size: cover;
     --bg-repeat: no-repeat;
     position: fixed;
     inset: 0;
     z-index: -1;
     background-color: #111;
-    background-image:url('fundo.jpg')
+    background-image:
       linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.5)),  /* overlay escuro */
       var(--bg-image);
     background-size: 100% 100%, var(--bg-size);
